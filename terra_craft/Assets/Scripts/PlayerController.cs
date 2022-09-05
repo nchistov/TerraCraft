@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        Vector2 movment = new Vector2(deltaX * 5, _body.velocity.y);
+        Vector2 movment = new Vector2(deltaX * 10, _body.velocity.y);
         _body.velocity = movment;
 
         Vector3 max = _box.bounds.max;
