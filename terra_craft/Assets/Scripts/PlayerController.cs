@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 250.0f;
+    public float speed = 60.0f;
     public float jumpForce = 12.0f;
 
     private Rigidbody2D _body;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         _body.gravityScale = grounded && deltaX == 0 ? 0 : 1;
         if (grounded && Input.GetKeyDown(KeyCode.UpArrow)) {
-            _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _body.AddForce(Vector2.up * jumpForce * 5, ForceMode2D.Impulse);
         }
 
         if (!Mathf.Approximately(deltaX, 0)) {
