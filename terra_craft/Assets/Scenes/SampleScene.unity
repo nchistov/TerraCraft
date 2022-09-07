@@ -255,6 +255,7 @@ MonoBehaviour:
   - {fileID: 5761637442968651674, guid: e04be59278913984791ff3f8b2d1e21b, type: 3}
   - {fileID: 7713178355936294957, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
   - {fileID: 3042711459135324169, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
+  worldWidth: 200
 --- !u!4 &665830547
 Transform:
   m_ObjectHideFlags: 0
@@ -396,7 +397,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 8
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
