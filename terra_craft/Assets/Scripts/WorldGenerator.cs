@@ -16,7 +16,9 @@ public class WorldGenerator : MonoBehaviour
         for (float x = -((worldWidth / 2) * 1.15f); x < ((worldWidth / 2) * 1.15f) + 0.5f; x += 1.15f) {
             int j = Random.Range(0, 2);
             if (j == 0) {
-                height++;
+                if (height < 15) {
+                    height++;
+                }
             } else {
                 if (height > 4) {
                     height--;
