@@ -353,6 +353,7 @@ MonoBehaviour:
   - {fileID: 7713178355936294957, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
   - {fileID: 3042711459135324169, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
   worldWidth: 200
+  worldType: 0
 --- !u!4 &665830547
 Transform:
   m_ObjectHideFlags: 0

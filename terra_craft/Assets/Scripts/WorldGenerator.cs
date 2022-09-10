@@ -8,20 +8,44 @@ public class WorldGenerator : MonoBehaviour
 
     public int worldWidth = 100;
 
+    public int worldType = 0; // 0 - Default, 1 - Flat
+
     private GameObject _block;
     private int height = 4;
+    private enum State {
+        hill = 0,
+        plat = 1
+    }
+    private State _state = State.plat;
+
+    private int aim_h = 0;
+    private int aim_l = 0;
 
     void Start()
     {
         for (float x = -((worldWidth / 2) * 1.15f); x < ((worldWidth / 2) * 1.15f) + 0.5f; x += 1.15f) {
-            int j = Random.Range(0, 2);
-            if (j == 0) {
-                if (height < 15) {
-                    height++;
-                }
-            } else {
-                if (height > 4) {
-                    height--;
+            if (worldType == 0) {
+                if (aim_l == 0 && _state == State.plat) {
+                    _state = State.hill;
+                    aim_h = Random.Range(-5, 6);
+                } else if (_state == State.hill && aim_h != 0) {
+                    if (aim_h < 0) {
+                        if (height > 3) {
+                            height -= 1;
+                            aim_h += 1;
+                        } else {
+                            aim_h = 0;
+                        }
+                    } else if (aim_h > 0) {
+                        height += 1;
+                        aim_h -= 1;
+                    }
+                } else if (aim_h == 0 && _state == State.hill) {
+                    _state = State.plat;
+                    aim_l = Random.Range(1, 6);
+                    Debug.Log(aim_l);
+                } else if (_state == State.plat) {
+                    aim_l -= 1;
                 }
             }
 
