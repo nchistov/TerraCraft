@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _body;
     private BoxCollider2D _box;
+    private Collider2D hit;
+
+    private Vector2 corner1;
+    private Vector2 corner2;
 
     void Start()
     {
@@ -35,7 +39,7 @@ public class PlayerController : MonoBehaviour
             grounded = true;
         }
 
-        _body.gravityScale = grounded && deltaX == 0 ? 0 : 1;
+        _body.gravityScale = grounded && deltaX == 0 ? 0 : 2;
         if (grounded && Input.GetKeyDown(KeyCode.UpArrow)) {
             _body.AddForce(Vector2.up * jumpForce * 5, ForceMode2D.Impulse);
         }

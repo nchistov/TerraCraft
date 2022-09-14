@@ -43,7 +43,6 @@ public class WorldGenerator : MonoBehaviour
                 } else if (aim_h == 0 && _state == State.hill) {
                     _state = State.plat;
                     aim_l = Random.Range(1, 6);
-                    Debug.Log(aim_l);
                 } else if (_state == State.plat) {
                     aim_l -= 1;
                 }
