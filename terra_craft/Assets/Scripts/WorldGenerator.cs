@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
+    private static Dictionary<Vector3,GameObject> blocks = new Dictionary<Vector3,GameObject>();
+
     public GameObject[] prefabs;
     public GameObject player;
 
@@ -52,18 +54,30 @@ public class WorldGenerator : MonoBehaviour
             for (int i = 1; i > -20; i--) {
                 _block = Instantiate(prefabs[2]) as GameObject;
                 _block.transform.position = new Vector3(x, (1.15f * i), 0.0f);
+                blocks.Add(_block.transform.position, _block);
             }
 
             for (int i = 2; i < height + 1; i++) {
                 _block = Instantiate(prefabs[1]) as GameObject;
                 _block.transform.position = new Vector3(x, (1.15f * i), 0.0f);
+                blocks.Add(_block.transform.position, _block);
             }
 
             _block = Instantiate(prefabs[0]) as GameObject;
             _block.transform.position = new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f);
+            blocks.Add(_block.transform.position, _block);
 
             if (Mathf.Round(x) == 0) {
                 player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
+            }
+        }
+    }
+
+    public static void RemoveObject(Vector3 position) {
+        foreach (Vector3 key in blocks.Keys) {
+            if(position==key) {
+                MonoBehaviour.Destroy(blocks[key]);
+                blocks.Remove(key);
             }
         }
     }
