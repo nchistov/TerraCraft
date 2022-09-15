@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldGenerator : MonoBehaviour
 {
     public GameObject[] prefabs;
+    public GameObject player;
 
     public int worldWidth = 100;
 
@@ -60,6 +61,10 @@ public class WorldGenerator : MonoBehaviour
 
             _block = Instantiate(prefabs[0]) as GameObject;
             _block.transform.position = new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f);
+
+            if (Mathf.Round(x) == 0) {
+                player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
+            }
         }
     }
 
