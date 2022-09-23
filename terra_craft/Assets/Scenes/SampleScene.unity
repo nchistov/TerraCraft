@@ -206,7 +206,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &389762924
 MonoBehaviour:
@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228e798e2a745ca46996fab15b6a1d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 665830545}
+  wg: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +370,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &730272223
 GameObject:
@@ -456,7 +458,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &730272226
 BoxCollider2D:
@@ -471,7 +473,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0036543012, y: 0}
+  m_Offset: {x: 0.03503585, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -482,7 +484,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0449241, y: 1.11}
+  m_Size: {x: 0.77142286, y: 1.11}
   m_EdgeRadius: 0
 --- !u!50 &730272227
 Rigidbody2D:
@@ -496,7 +498,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 6
+  m_Mass: 4.5
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -624,7 +626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3042711459135324167, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3042711459135324167, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -754,7 +756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7713178355936294959, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7713178355936294959, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
       propertyPath: m_LocalPosition.x

@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
         Vector3 max = _box.bounds.max;
         Vector2 min = _box.bounds.min;
 
-        Vector2 corner1 = new Vector2(max.x, min.y - .1f);
-        Vector2 corner2 = new Vector2(min.x, min.y - .2f);
+        Vector2 corner1 = new Vector2(max.x - 0.01f, min.y - .1f);
+        Vector2 corner2 = new Vector2(min.x + 0.01f, min.y - .2f);
 
         Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
             grounded = true;
         }
 
-        _body.gravityScale = grounded && deltaX == 0 ? 0 : 2;
+        _body.gravityScale = grounded && deltaX == 0 ? 0 : 3;
         if (grounded && Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
             _body.AddForce(Vector2.up * jumpForce * 5, ForceMode2D.Impulse);
         }

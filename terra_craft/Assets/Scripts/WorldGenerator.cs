@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    private static Dictionary<Vector3,GameObject> blocks = new Dictionary<Vector3,GameObject>();
+    private static List<GameObject> blocks = new List<GameObject>();
 
-    public GameObject[] prefabs;
+    [SerializeField] private GameObject[] prefabs;
     public GameObject player;
 
     public int worldWidth = 100;
 
     public int worldType = 0; // 0 - Default, 1 - Flat
 
-    private GameObject _block;
+    private static GameObject _block;
     private int height = 4;
     private enum State {
         hill = 0,
@@ -51,21 +51,15 @@ public class WorldGenerator : MonoBehaviour
                 }
             }
 
-            for (int i = 1; i > -20; i--) {
-                _block = Instantiate(prefabs[2]) as GameObject;
-                _block.transform.position = new Vector3(x, (1.15f * i), 0.0f);
-                blocks.Add(_block.transform.position, _block);
+            for (int i = height - 5; i > -20; i--) {
+                AddObject(new Vector3(x, (1.15f * i), 0.0f), 2);
             }
 
-            for (int i = 2; i < height + 1; i++) {
-                _block = Instantiate(prefabs[1]) as GameObject;
-                _block.transform.position = new Vector3(x, (1.15f * i), 0.0f);
-                blocks.Add(_block.transform.position, _block);
+            for (int i = height - 4; i < height + 1; i++) {
+                AddObject(new Vector3(x, (1.15f * i), 0.0f), 1);
             }
 
-            _block = Instantiate(prefabs[0]) as GameObject;
-            _block.transform.position = new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f);
-            blocks.Add(_block.transform.position, _block);
+            AddObject(new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f), 0);
 
             if (Mathf.Round(x) == 0) {
                 player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
@@ -73,13 +67,32 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    public static void RemoveObject(Vector3 position) {
-        foreach (Vector3 key in blocks.Keys) {
-            if(position==key) {
-                MonoBehaviour.Destroy(blocks[key]);
-                blocks.Remove(key);
+    public static bool RemoveObject(Vector3 position)
+    {
+        foreach (GameObject block in blocks) {
+            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
+                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
+                    Destroy(block.gameObject);
+                    blocks.Remove(block);
+                    return true;
+                }
             }
         }
+        return false;
+    }
+
+    public void AddObject(Vector3 position, int type)
+    {
+        _block = Instantiate(prefabs[type]) as GameObject;
+        _block.transform.position = position;
+        blocks.Add(_block);
+    }
+
+    public static void AddBlock(Vector3 position, int type)
+    {   
+        var wg = new WorldGenerator();
+
+        wg.AddObject(position, type);
     }
 
     void Update()
