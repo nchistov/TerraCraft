@@ -24,8 +24,10 @@ public class FollowMouse : MonoBehaviour
 
         if(Input.GetMouseButton(0)) {
             if (transform.position != lastPos) {
-                if (!WorldGenerator.RemoveObject(transform.position)) {
+                if (!wg.ExistObject(transform.position)) {
                     wg.AddObject(transform.position, cubeType);
+                } else {
+                    StartCoroutine(wg.RemoveBlock(transform.position));
                 }
                 lastPos = transform.position;
             }
