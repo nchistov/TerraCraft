@@ -69,47 +69,51 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 
-    public bool RemoveObject(Vector3 position)
+    public GameObject GetObject(Vector3 position)
     {
         foreach (GameObject block in blocks) {
             if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
                 if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    Destroy(block.gameObject);
-                    blocks.Remove(block);
-                    return true;
+                    return block;
                 }
             }
         }
-        return false;
+        return null;
+    }
+
+    public void RemoveObject(Vector3 position)
+    {
+        if (ExistObject(position)) {
+            GameObject block = GetObject(position);
+            blocks.Remove(block);
+            Destroy(block.gameObject);
+        }
     }
 
     public IEnumerator RemoveBlock(Vector3 position)
     {
-        foreach (GameObject block in blocks) {
-            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
-                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    Vector3 pos1 = position;
-                    removing.SetActive(true);
-                    removing.transform.position = pos1;
-                    for(int i = 0; i < 8; i++) {
-                        removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
-                                                               removing.transform.localScale.z);
-                        yield return new WaitForSeconds(0.05f);
-                        removing.SetActive(true);  // Этот код должен замениться.
+        if (ExistObject(position)) {
+            GameObject block = GetObject(position);
+            Vector3 pos1 = position;
+            removing.SetActive(true);
+            removing.transform.position = pos1;
+            for(int i = 0; i < 8; i++) {
+                removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
+                                                        removing.transform.localScale.z);
+                yield return new WaitForSeconds(0.05f);
+                removing.SetActive(true);  // Этот код должен замениться.
 
-                        if (!Input.GetMouseButton(0) || !(cursor.transform.position == pos1)) {
-                            removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
-                            removing.SetActive(false);
-                            yield break;
-                        }
-                    }
-                    Destroy(block.gameObject);
-                    blocks.Remove(block);
-
+                if (!Input.GetMouseButton(0) || !(cursor.transform.position == pos1)) {
                     removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
                     removing.SetActive(false);
+                    yield break;
                 }
             }
+            Destroy(block.gameObject);
+            blocks.Remove(block);
+
+            removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+            removing.SetActive(false);
         }
     }
 
@@ -130,13 +134,6 @@ public class WorldGenerator : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public static void AddBlock(Vector3 position, int type)
-    {   
-        var wg = new WorldGenerator();
-
-        wg.AddObject(position, type);
     }
 
     void Update()
