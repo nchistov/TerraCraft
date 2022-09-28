@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _body.gravityScale = grounded && deltaX == 0 ? 0 : 3;
-        if (grounded && Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) {
+        if (grounded && Input.GetKeyDown(KeyCode.UpArrow) || grounded && Input.GetKeyDown(KeyCode.W)) {
             _body.AddForce(Vector2.up * jumpForce * 5, ForceMode2D.Impulse);
         }
 
