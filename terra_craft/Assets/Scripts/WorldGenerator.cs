@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    private static List<GameObject> blocks = new List<GameObject>();
+    private static Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
 
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private GameObject cursor;
@@ -71,7 +71,7 @@ public class WorldGenerator : MonoBehaviour
 
     public GameObject GetObject(Vector3 position)
     {
-        foreach (GameObject block in blocks) {
+        foreach (GameObject block in blocks.Keys) {
             if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
                 if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
                     return block;
@@ -121,12 +121,12 @@ public class WorldGenerator : MonoBehaviour
     {
         _block = Instantiate(prefabs[type]) as GameObject;
         _block.transform.position = position;
-        blocks.Add(_block);
+        blocks.Add(_block, type);
     }
 
     public bool ExistObject(Vector3 position)
     {
-        foreach (GameObject block in blocks) {
+        foreach (GameObject block in blocks.Keys) {
             if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
                 if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
                     return true;
