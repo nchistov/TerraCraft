@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 665830545}
-  wg: {fileID: 0}
+  wc: {fileID: 0}
   cubeType: 0
 --- !u!1 &519420028
 GameObject:
@@ -332,6 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 665830547}
   - component: {fileID: 665830546}
+  - component: {fileID: 665830548}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -375,6 +376,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &665830548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665830545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb016b203f218b84cb3a18a66ad01414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 5761637442968651674, guid: e04be59278913984791ff3f8b2d1e21b, type: 3}
+  - {fileID: 7713178355936294957, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
+  - {fileID: 3042711459135324169, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
+  cursor: {fileID: 389762921}
+  removing: {fileID: 1302754706}
+  worldWidth: 200
+  worldType: 0
 --- !u!1 &730272223
 GameObject:
   m_ObjectHideFlags: 0

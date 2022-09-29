@@ -6,7 +6,7 @@ using UnityEngine;
 public class FollowMouse : MonoBehaviour
 {
     [SerializeField] private GameObject world;
-    public WorldGenerator wg;
+    public WorldController wc;
 
     private Vector3 lastPos = new Vector3(1, 1, 0);
 
@@ -14,7 +14,7 @@ public class FollowMouse : MonoBehaviour
 
     void Start()
     {
-        wg = world.GetComponent<WorldGenerator>();
+        wc = world.GetComponent<WorldController>();
     }
 
     void Update()
@@ -24,10 +24,10 @@ public class FollowMouse : MonoBehaviour
 
         if(Input.GetMouseButton(0)) {
             if (transform.position != lastPos) {
-                if (!wg.ExistObject(transform.position)) {
-                    wg.AddObject(transform.position, cubeType);
+                if (!wc.ExistObject(transform.position)) {
+                    wc.AddObject(transform.position, cubeType);
                 } else {
-                    StartCoroutine(wg.RemoveBlock(transform.position));
+                    StartCoroutine(wc.RemoveBlock(transform.position));
                 }
                 lastPos = transform.position;
             }

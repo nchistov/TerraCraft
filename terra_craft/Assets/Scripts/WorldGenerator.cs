@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    private static Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
-
-    [SerializeField] private GameObject[] prefabs;
-    [SerializeField] private GameObject cursor;
-    [SerializeField] private GameObject removing;
     public GameObject player;
 
     public int worldWidth = 100;
 
     public int worldType = 0; // 0 - Default, 1 - Flat
-
-    private static GameObject _block;
     private int height = 4;
     private enum State {
         hill = 0,
@@ -26,8 +19,12 @@ public class WorldGenerator : MonoBehaviour
     private int aim_h = 0;
     private int aim_l = 0;
 
+    private WorldController wc;
+
     void Start()
     {
+        wc = gameObject.GetComponent<WorldController>();
+
         for (float x = -((worldWidth / 2) * 1.15f); x < ((worldWidth / 2) * 1.15f) + 0.5f; x += 1.15f) {
             if (worldType == 0) {
                 if (aim_l == 0 && _state == State.plat) {
@@ -54,86 +51,19 @@ public class WorldGenerator : MonoBehaviour
             }
 
             for (int i = height - 5; i > -20; i--) {
-                AddObject(new Vector3(x, (1.15f * i), 0.0f), 2);
+                wc.AddObject(new Vector3(x, (1.15f * i), 0.0f), 2);
             }
 
             for (int i = height - 4; i < height + 1; i++) {
-                AddObject(new Vector3(x, (1.15f * i), 0.0f), 1);
+                wc.AddObject(new Vector3(x, (1.15f * i), 0.0f), 1);
             }
 
-            AddObject(new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f), 0);
+            wc.AddObject(new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f), 0);
 
             if (Mathf.Round(x) == 0) {
                 player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
             }
         }
-    }
-
-    public GameObject GetObject(Vector3 position)
-    {
-        foreach (GameObject block in blocks.Keys) {
-            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
-                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    return block;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void RemoveObject(Vector3 position)
-    {
-        if (ExistObject(position)) {
-            GameObject block = GetObject(position);
-            blocks.Remove(block);
-            Destroy(block.gameObject);
-        }
-    }
-
-    public IEnumerator RemoveBlock(Vector3 position)
-    {
-        if (ExistObject(position)) {
-            GameObject block = GetObject(position);
-            Vector3 pos1 = position;
-            removing.SetActive(true);
-            removing.transform.position = pos1;
-            for(int i = 0; i < 8; i++) {
-                removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
-                                                        removing.transform.localScale.z);
-                yield return new WaitForSeconds(0.05f);
-                removing.SetActive(true);  // Этот код должен замениться.
-
-                if (!Input.GetMouseButton(0) || !(cursor.transform.position == pos1)) {
-                    removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
-                    removing.SetActive(false);
-                    yield break;
-                }
-            }
-            Destroy(block.gameObject);
-            blocks.Remove(block);
-
-            removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
-            removing.SetActive(false);
-        }
-    }
-
-    public void AddObject(Vector3 position, int type)
-    {
-        _block = Instantiate(prefabs[type]) as GameObject;
-        _block.transform.position = position;
-        blocks.Add(_block, type);
-    }
-
-    public bool ExistObject(Vector3 position)
-    {
-        foreach (GameObject block in blocks.Keys) {
-            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
-                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     void Update()
