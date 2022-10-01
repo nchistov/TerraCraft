@@ -352,12 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cabf09d480036b4b9f4bfa1a15508e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 5761637442968651674, guid: e04be59278913984791ff3f8b2d1e21b, type: 3}
-  - {fileID: 7713178355936294957, guid: 768ef205324c31344ab77b488ea13a1d, type: 3}
-  - {fileID: 3042711459135324169, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
-  cursor: {fileID: 389762921}
-  removing: {fileID: 1302754706}
   player: {fileID: 730272223}
   worldWidth: 200
   worldType: 0
@@ -394,8 +388,7 @@ MonoBehaviour:
   - {fileID: 3042711459135324169, guid: fc5018adf363c9c4d8c0004a0db08a20, type: 3}
   cursor: {fileID: 389762921}
   removing: {fileID: 1302754706}
-  worldWidth: 200
-  worldType: 0
+  currentInstremunt: 2
 --- !u!1 &730272223
 GameObject:
   m_ObjectHideFlags: 0
