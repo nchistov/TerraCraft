@@ -63,6 +63,8 @@ public class WorldGenerator : MonoBehaviour
             if (Mathf.Round(x) == 0) {
                 player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
             }
+
+            wc.AddObject(new Vector3(x, (1.15f * -20), 0.0f), 3);
         }
     }
 

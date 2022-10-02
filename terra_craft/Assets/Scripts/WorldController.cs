@@ -60,34 +60,36 @@ public class WorldController : MonoBehaviour
     public IEnumerator RemoveBlock(Vector3 position)
     {
         if (ExistObject(position)) {
-            float time;
             GameObject block = GetObject(position);
-            Vector3 pos1 = position;
-            removing.SetActive(true);
-            removing.transform.position = pos1;
-            List<float> data = BLOCK_DATA[blocks[block]];
-            if (data[2] == currentInstremunt) {
-                time = data[1];
-            } else {
-                time = data[0];
-            }
-            for(int i = 0; i < 8; i++) {
-                removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
-                                                        removing.transform.localScale.z);
-                yield return new WaitForSeconds(time);
-                removing.SetActive(true);  // Этот код должен замениться.
-
-                if (!Input.GetMouseButton(0) || !(cursor.transform.position == pos1)) {
-                    removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
-                    removing.SetActive(false);
-                    yield break;
+            if (!(blocks[block] == 3)) {
+                float time;
+                Vector3 pos1 = position;
+                removing.SetActive(true);
+                removing.transform.position = pos1;
+                List<float> data = BLOCK_DATA[blocks[block]];
+                if (data[2] == currentInstremunt) {
+                    time = data[1];
+                } else {
+                    time = data[0];
                 }
-            }
-            Destroy(block.gameObject);
-            blocks.Remove(block);
+                for(int i = 0; i < 8; i++) {
+                    removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
+                                                            removing.transform.localScale.z);
+                    yield return new WaitForSeconds(time);
+                    removing.SetActive(true);  // Этот код должен замениться.
 
-            removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
-            removing.SetActive(false);
+                    if (!Input.GetMouseButton(0) || !(cursor.transform.position == pos1)) {
+                        removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+                        removing.SetActive(false);
+                        yield break;
+                    }
+                }
+                Destroy(block.gameObject);
+                blocks.Remove(block);
+
+                removing.transform.localScale = new Vector3(0.1f, 0.1f, 1);
+                removing.SetActive(false);
+            }
         }
     }
 
