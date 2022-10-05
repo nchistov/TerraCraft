@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldController : MonoBehaviour
 {
-    private static Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
+    private Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
     private static Dictionary<int, List<float>> BLOCK_DATA = new Dictionary<int, List<float>>();
 
     [SerializeField] private GameObject[] prefabs;
@@ -13,6 +13,8 @@ public class WorldController : MonoBehaviour
 
     private static GameObject _block;
     private List<float> add = new List<float>();
+
+    private int count = 0;
 
     public float currentInstremunt = 0.0f;
 
@@ -39,9 +41,11 @@ public class WorldController : MonoBehaviour
     public GameObject GetObject(Vector3 position)
     {
         foreach (GameObject block in blocks.Keys) {
-            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
-                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    return block;
+            if (block != null) {
+                if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
+                    if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
+                        return block;
+                    }
                 }
             }
         }
@@ -103,9 +107,11 @@ public class WorldController : MonoBehaviour
     public bool ExistObject(Vector3 position)
     {
         foreach (GameObject block in blocks.Keys) {
-            if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
-                if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
-                    return true;
+            if (block != null) {
+                if (position.y > block.transform.position.y - 0.28f && position.y < block.transform.position.y + 0.28f) {
+                    if (position.x > block.transform.position.x - 0.28f && position.x < block.transform.position.x + 0.28f) {
+                        return true;
+                    }
                 }
             }
         }
@@ -114,6 +120,34 @@ public class WorldController : MonoBehaviour
 
     void Update()
     {
-        
+        if (count >= 180) {
+            count = 0;
+            FrameUpdate();
+        } else {
+            count += 1;
+        }
+    }
+
+    private void FrameUpdate()
+    {
+        Dictionary<Vector3, int> added = new Dictionary<Vector3, int>();
+
+        foreach (GameObject block in blocks.Keys) {
+            if (block != null) {
+                if (block.GetComponent<SpriteRenderer>().isVisible) {
+                    if (blocks[block] == 0 && ExistObject(new Vector3(block.transform.position.x, block.transform.position.y + 1.15f, 0))) {
+                            Vector3 pos = new Vector3(block.transform.position.x, block.transform.position.y, 0);
+                            added.Add(pos, 1);
+                            Destroy(block);
+                    }
+                }
+            }
+        }
+
+        foreach (Vector3 pos in added.Keys) {
+            AddObject(pos, added[pos]);
+        }
+
+        added.Clear();
     }
 }
