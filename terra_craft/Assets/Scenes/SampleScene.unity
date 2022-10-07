@@ -389,7 +389,7 @@ MonoBehaviour:
   - {fileID: 8781613085728936748, guid: 60e80dc794288cf409a1accc43fe5c5d, type: 3}
   cursor: {fileID: 389762921}
   removing: {fileID: 1302754706}
-  currentInstremunt: 2
+  currentInstremunt: 0
 --- !u!1 &730272223
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +539,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 60
   jumpForce: 12
+  player1: {fileID: 21300000, guid: a369a8115025f9c44b6fa6848ce3fe6a, type: 3}
+  player2: {fileID: 21300000, guid: a04c3512339c09a4fbf0d8dad76a1fef, type: 3}
+  player3: {fileID: 21300000, guid: 9bc8b4bc6118f5f41a25eb8051f01e61, type: 3}
 --- !u!82 &730272229
 AudioSource:
   m_ObjectHideFlags: 0

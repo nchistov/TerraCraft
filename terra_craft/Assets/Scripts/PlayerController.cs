@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     public float speed = 60.0f;
     public float jumpForce = 12.0f;
 
+    public Sprite player1;
+    public Sprite player2;
+    public Sprite player3;
+
     private Rigidbody2D _body;
     private BoxCollider2D _box;
     private Collider2D hit;
@@ -14,10 +18,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 corner1;
     private Vector2 corner2;
 
+    private SpriteRenderer _sprite;
+
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
         _box = GetComponent<BoxCollider2D>();
+        _sprite = GetComponent<SpriteRenderer>();
+
+        player1 = _sprite.sprite;
     }
 
     void Update()
@@ -46,6 +55,17 @@ public class PlayerController : MonoBehaviour
 
         if (!Mathf.Approximately(deltaX, 0)) {
 			transform.localScale = new Vector3(Mathf.Sign(deltaX) * -1, 1, -1);
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (_body.velocity.y > 0) {
+            _sprite.sprite = player2;
+        } else if (_body.velocity.y < 0) {
+            _sprite.sprite = player3;
+        } else {
+            _sprite.sprite = player1;
         }
     }
 }
