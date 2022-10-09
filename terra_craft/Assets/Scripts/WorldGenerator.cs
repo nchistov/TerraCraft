@@ -25,7 +25,7 @@ public class WorldGenerator : MonoBehaviour
     {
         wc = gameObject.GetComponent<WorldController>();
 
-        for (float x = -((worldWidth / 2) * 1.15f); x < ((worldWidth / 2) * 1.15f) + 0.5f; x += 1.15f) {
+        for (float x = -((worldWidth / 2) * wc.cubeSize); x < ((worldWidth / 2) * wc.cubeSize) + 0.5f; x += wc.cubeSize) {
             if (worldType == 0) {
                 if (aim_l == 0 && _state == State.plat) {
                     _state = State.hill;
@@ -51,20 +51,24 @@ public class WorldGenerator : MonoBehaviour
             }
 
             for (int i = height - 5; i > -20; i--) {
-                wc.AddObject(new Vector3(x, (1.15f * i), 0.0f), 2);
+                wc.AddObject(new Vector3(x, (wc.cubeSize * i), 0.0f), 2);
             }
 
             for (int i = height - 4; i < height + 1; i++) {
-                wc.AddObject(new Vector3(x, (1.15f * i), 0.0f), 1);
+                wc.AddObject(new Vector3(x, (wc.cubeSize * i), 0.0f), 1);
             }
 
-            wc.AddObject(new Vector3(x, (1.15f * height+1) + 0.15f, 0.0f), 0);
+            wc.AddObject(new Vector3(x, (wc.cubeSize * height+1) + 0.15f, 0.0f), 0);
 
             if (Mathf.Round(x) == 0) {
-                player.transform.position = new Vector3(x, (1.15f * height+1) + 1.0f, 0.0f);
+                player.transform.position = new Vector3(x, (wc.cubeSize * height+1) + 1.0f, 0.0f);
             }
 
-            wc.AddObject(new Vector3(x, (1.15f * -20), 0.0f), 3);
+            wc.AddObject(new Vector3(x, (wc.cubeSize * -20), 0.0f), 3);
+
+            if (Random.Range(0, 20) == 0) {
+                wc.AddTree(new Vector3(x, (wc.cubeSize * (height+2)), 0.0f));
+            }
         }
     }
 

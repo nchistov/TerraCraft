@@ -11,6 +11,8 @@ public class WorldController : MonoBehaviour
     [SerializeField] private GameObject cursor;
     [SerializeField] private GameObject removing;
 
+    public float cubeSize = 1.15f;
+
     private static GameObject _block;
     private List<float> add = new List<float>();
 
@@ -36,6 +38,35 @@ public class WorldController : MonoBehaviour
         // камень
         add.Add(0.2f); add.Add(0.08f); add.Add(2.0f);
         BLOCK_DATA.Add(2, new List<float>(add));
+        add.Clear();
+
+        // дуб
+        add.Add(0.1f); add.Add(0.03f); add.Add(3.0f);
+        BLOCK_DATA.Add(3, new List<float>(add));
+        add.Clear();
+
+        // дуб листья
+        add.Add(0.1f); add.Add(0.02f); add.Add(3.0f);
+        BLOCK_DATA.Add(4, new List<float>(add));
+        add.Clear();
+    }
+
+    public void AddTree(Vector3 position)
+    {
+        float top = position.y + (Random.Range(5, 7)) * cubeSize;
+
+        for (float y = position.y; y <= top; y += cubeSize) {
+            if (ExistObject(new Vector3(position.x, y, position.z))) {
+                RemoveObject(new Vector3(position.x, y, position.z));
+            }
+            AddObject(new Vector3(position.x, y, position.z), 3);
+        }
+
+        for (float x = position.x - cubeSize; x  <= position.x + cubeSize + 1; x += cubeSize) {
+            AddObject(new Vector3(x, top, position.z), 4);
+            AddObject(new Vector3(x, top - cubeSize, position.z), 4);
+        }
+        AddObject(new Vector3(position.x, top + cubeSize, position.z), 4);
     }
 
     public GameObject GetObject(Vector3 position)
@@ -65,7 +96,7 @@ public class WorldController : MonoBehaviour
     {
         if (ExistObject(position)) {
             GameObject block = GetObject(position);
-            if (!(blocks[block] == 3)) {
+            if (!(blocks[block] == 5)) {
                 float time;
                 Vector3 pos1 = position;
                 removing.SetActive(true);
@@ -135,7 +166,7 @@ public class WorldController : MonoBehaviour
         foreach (GameObject block in blocks.Keys) {
             if (block != null) {
                 if (block.GetComponent<SpriteRenderer>().isVisible) {
-                    if (blocks[block] == 0 && ExistObject(new Vector3(block.transform.position.x, block.transform.position.y + 1.15f, 0))) {
+                    if (blocks[block] == 0 && ExistObject(new Vector3(block.transform.position.x, block.transform.position.y + cubeSize, 0))) {
                             Vector3 pos = new Vector3(block.transform.position.x, block.transform.position.y, 0);
                             added.Add(pos, 1);
                             Destroy(block);

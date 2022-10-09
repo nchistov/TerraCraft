@@ -10,7 +10,7 @@ public class FollowMouse : MonoBehaviour
 
     private Vector3 lastPos = new Vector3(1, 1, 0);
 
-    public int cubeType = 0;
+    public int cubeType = 4;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class FollowMouse : MonoBehaviour
     void Update()
     {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(pos.x - (pos.x % 1.15f), pos.y - (pos.y % 1.15f), 0);
+        transform.position = new Vector3(pos.x - (pos.x % wc.cubeSize), pos.y - (pos.y % wc.cubeSize), 0);
 
         if(Input.GetMouseButton(0)) {
             if (transform.position != lastPos) {
