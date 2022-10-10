@@ -6,7 +6,7 @@ using UnityEngine;
 public class FollowMouse : MonoBehaviour
 {
     [SerializeField] private GameObject world;
-    public WorldController wc;
+    private WorldController wc;
 
     private Vector3 lastPos = new Vector3(1, 1, 0);
 

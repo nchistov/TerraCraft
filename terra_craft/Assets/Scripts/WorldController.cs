@@ -16,12 +16,16 @@ public class WorldController : MonoBehaviour
     private static GameObject _block;
     private List<float> add = new List<float>();
 
+    public TreeAdder td;
+
     private int count = 0;
 
     public float currentInstremunt = 0.0f;
 
     void Start()
     {
+        // td = GetComponent<TreeAdder>();
+
         // Кулак, меч, кирка, топор, лопата и мотыга.
         //   0     1     2      3      4        5
 
@@ -53,20 +57,8 @@ public class WorldController : MonoBehaviour
 
     public void AddTree(Vector3 position)
     {
-        float top = position.y + (Random.Range(5, 7)) * cubeSize;
-
-        for (float y = position.y; y <= top; y += cubeSize) {
-            if (ExistObject(new Vector3(position.x, y, position.z))) {
-                RemoveObject(new Vector3(position.x, y, position.z));
-            }
-            AddObject(new Vector3(position.x, y, position.z), 3);
-        }
-
-        for (float x = position.x - cubeSize; x  <= position.x + cubeSize + 1; x += cubeSize) {
-            AddObject(new Vector3(x, top, position.z), 4);
-            AddObject(new Vector3(x, top - cubeSize, position.z), 4);
-        }
-        AddObject(new Vector3(position.x, top + cubeSize, position.z), 4);
+        td = GetComponent<TreeAdder>();
+        td.AddTree(position);
     }
 
     public GameObject GetObject(Vector3 position)

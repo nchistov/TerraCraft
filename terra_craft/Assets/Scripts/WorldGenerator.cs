@@ -64,7 +64,7 @@ public class WorldGenerator : MonoBehaviour
                 player.transform.position = new Vector3(x, (wc.cubeSize * height+1) + 1.0f, 0.0f);
             }
 
-            wc.AddObject(new Vector3(x, (wc.cubeSize * -20), 0.0f), 3);
+            wc.AddObject(new Vector3(x, (wc.cubeSize * -20), 0.0f), 5);
 
             if (Random.Range(0, 20) == 0) {
                 wc.AddTree(new Vector3(x, (wc.cubeSize * (height+2)), 0.0f));
