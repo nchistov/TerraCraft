@@ -391,6 +391,7 @@ MonoBehaviour:
   - {fileID: 8781613085728936748, guid: 60e80dc794288cf409a1accc43fe5c5d, type: 3}
   cursor: {fileID: 389762921}
   removing: {fileID: 1302754706}
+  grass2: {fileID: 21300000, guid: 2e9c557487c4554469f1bb4ffa7bb97b, type: 3}
   cubeSize: 1.15
   td: {fileID: 0}
   currentInstremunt: 0

@@ -11,6 +11,8 @@ public class WorldController : MonoBehaviour
     [SerializeField] private GameObject cursor;
     [SerializeField] private GameObject removing;
 
+    [SerializeField] private Sprite grass2;
+
     public float cubeSize = 1.15f;
 
     private static GameObject _block;
@@ -122,6 +124,13 @@ public class WorldController : MonoBehaviour
     {
         _block = Instantiate(prefabs[type]) as GameObject;
         _block.transform.position = position;
+
+        if (type == 0) {
+            if (Random.Range(0, 5) == 0) {
+                _block.GetComponent<SpriteRenderer>().sprite = grass2;
+            }
+        }
+
         blocks.Add(_block, type);
     }
 
