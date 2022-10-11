@@ -19,6 +19,9 @@ public class WorldGenerator : MonoBehaviour
     private int aim_h = 0;
     private int aim_l = 0;
 
+    private int init_trees_probability = 50;
+    private int trees_probability = 50;
+
     private WorldController wc;
 
     void Start()
@@ -66,8 +69,11 @@ public class WorldGenerator : MonoBehaviour
 
             wc.AddObject(new Vector3(x, (wc.cubeSize * -20), 0.0f), 5);
 
-            if (Random.Range(0, 20) == 0) {
-                wc.AddTree(new Vector3(x, (wc.cubeSize * (height+2)), 0.0f));
+            if (Random.Range(0, trees_probability) == 0) {
+                trees_probability = init_trees_probability;
+                wc.AddTree(new Vector3(x, (wc.cubeSize * (height+2)), 0.0f), 0);
+            } else {
+                trees_probability -= 1;
             }
         }
     }

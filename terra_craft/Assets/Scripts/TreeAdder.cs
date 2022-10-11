@@ -8,10 +8,19 @@ public class TreeAdder : MonoBehaviour
 
     void Start()
     {
-        wc = GetComponent<WorldController>();
+        
     }
 
-    public void AddTree(Vector3 position)
+    public void AddTree(Vector3 position, int type)
+    {
+        wc = GetComponent<WorldController>();
+
+        if (type == 0) {
+            AddOak(position);
+        }
+    }
+
+    private void AddOak(Vector3 position)
     {
         float top = position.y + (Random.Range(5, 7)) * wc.cubeSize;
 

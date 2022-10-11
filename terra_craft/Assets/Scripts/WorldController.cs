@@ -24,8 +24,6 @@ public class WorldController : MonoBehaviour
 
     void Start()
     {
-        // td = GetComponent<TreeAdder>();
-
         // Кулак, меч, кирка, топор, лопата и мотыга.
         //   0     1     2      3      4        5
 
@@ -55,10 +53,10 @@ public class WorldController : MonoBehaviour
         add.Clear();
     }
 
-    public void AddTree(Vector3 position)
+    public void AddTree(Vector3 position, int type)
     {
         td = GetComponent<TreeAdder>();
-        td.AddTree(position);
+        td.AddTree(position, type);
     }
 
     public GameObject GetObject(Vector3 position)
