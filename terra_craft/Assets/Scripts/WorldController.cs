@@ -18,7 +18,7 @@ public class WorldController : MonoBehaviour
     private static GameObject _block;
     private List<float> add = new List<float>();
 
-    public TreeAdder td;
+    public TreeController tc;
 
     private int count = 0;
 
@@ -57,8 +57,8 @@ public class WorldController : MonoBehaviour
 
     public void AddTree(Vector3 position, int type)
     {
-        td = GetComponent<TreeAdder>();
-        td.AddTree(position, type);
+        tc = GetComponent<TreeController>();
+        tc.AddTree(position, type);
     }
 
     public GameObject GetObject(Vector3 position)
