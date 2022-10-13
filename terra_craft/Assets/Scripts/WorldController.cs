@@ -61,6 +61,19 @@ public class WorldController : MonoBehaviour
         tc.AddTree(position, type);
     }
 
+    public void AddToBlocks(GameObject block, int type)
+    {
+        blocks.Add(block, type);
+    }
+
+    public GameObject InstantiateObject(Vector3 position, int type)
+    {
+        _block = Instantiate(prefabs[type]) as GameObject;
+        _block.transform.position = position;
+
+        return _block;
+    }
+
     public GameObject GetObject(Vector3 position)
     {
         foreach (GameObject block in blocks.Keys) {

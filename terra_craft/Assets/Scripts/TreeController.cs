@@ -6,6 +6,8 @@ public class TreeController : MonoBehaviour
 {
     private WorldController wc;
 
+    private List<GameObject> wood = new List<GameObject>();
+
     void Start()
     {
         
@@ -30,14 +32,23 @@ public class TreeController : MonoBehaviour
             if (wc.ExistObject(new Vector3(position.x, y, position.z))) {
                 wc.RemoveObject(new Vector3(position.x, y, position.z));
             }
-            wc.AddObject(new Vector3(position.x, y, position.z), 3);
+            wood.Add(wc.InstantiateObject(new Vector3(position.x, y, position.z), 3));
         }
 
         for (float x = position.x - wc.cubeSize; x  <= position.x + wc.cubeSize + 1; x += wc.cubeSize) {
             for (float y = top; y > position.y + (wc.cubeSize * 4); y -= wc.cubeSize) {
+                if (wc.ExistObject(new Vector3(x, y, position.z))) {
+                    wc.RemoveObject(new Vector3(x, y, position.z));
+                }
                 wc.AddObject(new Vector3(x, y, position.z), 4);
             }
         }
+
+        foreach (GameObject block in wood) {
+            wc.AddToBlocks(block, 3);
+        }
+
+        wood.Clear();
     }
 
     void Update()
