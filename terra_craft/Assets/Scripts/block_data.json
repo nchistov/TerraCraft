@@ -1,0 +1,35 @@
+{
+  "blocks":
+  [
+    {
+      "id": 0,
+      "worst": 0.1,
+      "best": 0.05,
+      "instrument": 4
+    },
+    {
+      "id": 1,
+      "worst": 0.1,
+      "best": 0.05,
+      "instrument": 4
+    },
+    {
+      "id": 2,
+      "worst": 0.2,
+      "best": 0.08,
+      "instrument": 2
+    },
+    {
+      "id": 3,
+      "worst": 0.1,
+      "best": 0.03,
+      "instrument": 3
+    },
+    {
+      "id": 4,
+      "worst": 0.1,
+      "best": 0.02,
+      "instrument": 3
+    }
+  ]
+}

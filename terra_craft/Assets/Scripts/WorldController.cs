@@ -13,6 +13,8 @@ public class WorldController : MonoBehaviour
 
     [SerializeField] private Sprite grass2;
 
+    public TextAsset jsonFile;
+
     public float cubeSize = 1.15f;
 
     private static GameObject _block;
@@ -26,33 +28,14 @@ public class WorldController : MonoBehaviour
 
     void Start()
     {
-        // Кулак, меч, кирка, топор, лопата и мотыга.
-        //   0     1     2      3      4        5
-
-        // дерн
-        add.Add(0.1f); add.Add(0.05f); add.Add(4.0f);
-        BLOCK_DATA.Add(0, new List<float>(add));
-        add.Clear();
-
-        // земля
-        add.Add(0.1f); add.Add(0.05f); add.Add(4.0f);
-        BLOCK_DATA.Add(1, new List<float>(add));
-        add.Clear();
-
-        // камень
-        add.Add(0.2f); add.Add(0.08f); add.Add(2.0f);
-        BLOCK_DATA.Add(2, new List<float>(add));
-        add.Clear();
-
-        // дуб
-        add.Add(0.1f); add.Add(0.03f); add.Add(3.0f);
-        BLOCK_DATA.Add(3, new List<float>(add));
-        add.Clear();
-
-        // дуб листья
-        add.Add(0.1f); add.Add(0.02f); add.Add(3.0f);
-        BLOCK_DATA.Add(4, new List<float>(add));
-        add.Clear();
+        Blocks blocksInJson = JsonUtility.FromJson<Blocks>(jsonFile.text);
+ 
+        foreach (Block block in blocksInJson.blocks)
+        {
+            add.Add(block.worst); add.Add(block.best); add.Add(block.instrument);
+            BLOCK_DATA.Add(block.id, new List<float>(add));
+            add.Clear();
+        }
     }
 
     public void AddTree(Vector3 position, int type)
