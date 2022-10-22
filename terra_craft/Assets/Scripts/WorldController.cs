@@ -1,3 +1,5 @@
+// Класс контролирующий мир.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +7,14 @@ using UnityEngine;
 public class WorldController : MonoBehaviour
 {
     private Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
+
+    // Списки для чронения данных о кубиках.
     private static Dictionary<int, List<float>> BLOCK_DATA = new Dictionary<int, List<float>>();
+    private static Dictionary<int, List<string>> NAMES = new Dictionary<int, List<string>>();
 
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private GameObject cursor;
-    [SerializeField] private GameObject removing;
+    [SerializeField] private GameObject removing;  // GameObject обозначающий текущюю крепкость кубика.
 
     [SerializeField] private Sprite grass2;
 
@@ -19,6 +24,7 @@ public class WorldController : MonoBehaviour
 
     private static GameObject _block;
     private List<float> add = new List<float>();
+    private List<string> addToNAMES = new List<string>();
 
     public TreeController tc;
 
@@ -35,6 +41,10 @@ public class WorldController : MonoBehaviour
             add.Add(block.worst); add.Add(block.best); add.Add(block.instrument);
             BLOCK_DATA.Add(block.id, new List<float>(add));
             add.Clear();
+
+            addToNAMES.Add(block.ru_name); addToNAMES.Add(block.en_name);
+            NAMES.Add(block.id, new List<string>(addToNAMES));
+            addToNAMES.Clear();
         }
     }
 

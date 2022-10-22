@@ -3,30 +3,40 @@
   [
     {
       "id": 0,
+      "ru_name" : "дёрн",
+      "en_name" : "grass",
       "worst": 0.1,
       "best": 0.05,
       "instrument": 4
     },
     {
       "id": 1,
+      "ru_name" : "земля",
+      "en_name" : "dirt",
       "worst": 0.1,
       "best": 0.05,
       "instrument": 4
     },
     {
       "id": 2,
+      "ru_name" : "камень",
+      "en_name" : "stone",
       "worst": 0.2,
       "best": 0.08,
       "instrument": 2
     },
     {
       "id": 3,
+      "ru_name" : "дуб",
+      "en_name" : "wood oak",
       "worst": 0.1,
       "best": 0.03,
       "instrument": 3
     },
     {
       "id": 4,
+      "ru_name" : "листва дуба",
+      "en_name" : "leaves oak",
       "worst": 0.1,
       "best": 0.02,
       "instrument": 3
