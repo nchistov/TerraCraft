@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
         Vector3 max = _box.bounds.max;
         Vector2 min = _box.bounds.min;
 
-        Vector2 corner1 = new Vector2(max.x, min.y - .1f);
-        Vector2 corner2 = new Vector2(min.x, min.y - .2f);
+        Vector2 corner1 = new Vector2(max.x - 0.1f, min.y - .1f);
+        Vector2 corner2 = new Vector2(min.x + 0.1f, min.y - .2f);
 
         Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
 
