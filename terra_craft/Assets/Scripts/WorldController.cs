@@ -8,9 +8,8 @@ public class WorldController : MonoBehaviour
 {
     private Dictionary<GameObject, int> blocks = new Dictionary<GameObject, int>();
 
-    // Списки для чронения данных о кубиках.
-    private static Dictionary<int, List<float>> BLOCK_DATA = new Dictionary<int, List<float>>();
-    private static Dictionary<int, List<string>> NAMES = new Dictionary<int, List<string>>();
+    // Список для хронения данных о кубиках.
+    private static Dictionary<int, Block> BLOCK_DATA = new Dictionary<int, Block>();
 
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private GameObject cursor;
@@ -23,8 +22,7 @@ public class WorldController : MonoBehaviour
     public float cubeSize = 1.15f;
 
     private static GameObject _block;
-    private List<float> add = new List<float>();
-    private List<string> addToNAMES = new List<string>();
+    private Block add = new Block();
 
     public TreeController tc;
 
@@ -38,13 +36,10 @@ public class WorldController : MonoBehaviour
  
         foreach (Block block in blocksInJson.blocks)
         {
-            add.Add(block.worst); add.Add(block.best); add.Add(block.instrument);
-            BLOCK_DATA.Add(block.id, new List<float>(add));
-            add.Clear();
-
-            addToNAMES.Add(block.ru_name); addToNAMES.Add(block.en_name);
-            NAMES.Add(block.id, new List<string>(addToNAMES));
-            addToNAMES.Clear();
+            // add.Add(block.worst); add.Add(block.best); add.Add(block.instrument);
+            add.id = block.id; add.ru_name = block.ru_name; add.en_name = block.en_name;
+            add.worst = block.worst; add.best = block.best; add.instrument = block.instrument;
+            BLOCK_DATA.Add(block.id, add);
         }
     }
 
@@ -99,11 +94,11 @@ public class WorldController : MonoBehaviour
                 Vector3 pos1 = position;
                 removing.SetActive(true);
                 removing.transform.position = pos1;
-                List<float> data = BLOCK_DATA[blocks[block]];
-                if (data[2] == currentInstremunt) {
-                    time = data[1];
+                Block data = BLOCK_DATA[blocks[block]];
+                if (data.instrument == currentInstremunt) {
+                    time = data.best;
                 } else {
-                    time = data[0];
+                    time = data.worst;
                 }
                 for(int i = 0; i < 8; i++) {
                     removing.transform.localScale = new Vector3(removing.transform.localScale.x + 0.1f, removing.transform.localScale.y + 0.1f,
